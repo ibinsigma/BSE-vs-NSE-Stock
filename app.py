@@ -1,4 +1,4 @@
-from flask import Flask , render_template, request, redirect
+from flask import Flask , render_template, request, redirect, url_for
 from datetime import datetime
 from pprint import pprint
 
@@ -76,7 +76,8 @@ def handle_data():
 	print("-------------------------")
 	pprint(bse_final_list)
 
-
+	labels = []
+	values = []
 	diff_final_list  = []
 	diff_temp_list = []
 	for j in bse_final_list :
@@ -89,14 +90,29 @@ def handle_data():
 
 				diff_temp_list.append(j[0])
 				diff = abs( float(j[2]) - float(k[1]) )
+
+				labels.append(j[0])
+				values.append(round(diff,2))
+
+
 				diff_temp_list.append(round(diff,2))
 				diff_final_list.append(diff_temp_list)
 				diff_temp_list = []
 	pprint(diff_final_list)
+	print(labels)
+	print(values)
 
-	return redirect('/')
+
+
+
+
+
+	return render_template('graph.html', labels=labels , values=values)
 	# your code
 	# return a response
+	#return "Done"
+
+
 
 if __name__ == "__main__" :
 	app.run(debug=True)
