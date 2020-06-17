@@ -117,10 +117,13 @@ def handle_data():
 
 
 
-	return render_template('graph.html', labels=labels , values=values)
+	return render_template('graph.html', labels=labels , values=values, name=comp, scode=scripcode, ccode=company)
 	# your code
 	# return a response
 	#return "Done"
+
+
+'''
 @app.route('/test')
 def test():
 	return render_template("test.html")
@@ -139,6 +142,6 @@ def form():
 	print(company)
 
 	return "Done!!"
-
+'''
 if __name__ == "__main__" :
 	app.run(debug=True)
