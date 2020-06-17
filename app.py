@@ -1,6 +1,8 @@
 from flask import Flask , render_template, request, redirect, url_for
 from datetime import datetime
 from pprint import pprint
+from bsedata.bse import BSE
+
 
 import json
 import requests
@@ -14,9 +16,17 @@ def hello_world():
 
 @app.route('/handle_data', methods=['POST'])
 def handle_data():
-	company = request.form['company']
-	scripcode = request.form['scripcode']
-	print(company,scripcode)
+	comp = request.form['tags']
+	print(comp)
+	b = BSE()
+	b.updateScripCodes()
+	d = b.getScripCodes()
+	rev_d = dict(map(reversed, d.items()))
+	scripcode = rev_d[comp]
+	print(scripcode)
+	quote = b.getQuote(scripcode)
+	company = quote["securityID"]
+	print(company)
 
 
 # -----------READING NSE DATA
@@ -111,8 +121,24 @@ def handle_data():
 	# your code
 	# return a response
 	#return "Done"
+@app.route('/test')
+def test():
+	return render_template("test.html")
+@app.route('/form', methods=['POST'])
+def form():
+	comp = request.form['tags']
+	print(comp)
+	b = BSE()
+	b.updateScripCodes()
+	d = b.getScripCodes()
+	rev_d = dict(map(reversed, d.items()))
+	scrip = rev_d[comp]
+	print(scrip)
+	quote = b.getQuote(scrip)
+	company = quote["securityID"]
+	print(company)
 
-
+	return "Done!!"
 
 if __name__ == "__main__" :
 	app.run(debug=True)
