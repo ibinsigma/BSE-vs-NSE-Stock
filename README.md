@@ -3,13 +3,29 @@
 
 ## Installation
 
+### Clone the repo
 `git clone https://github.com/ibinsigma/BSE-vs-NSE-Stock.git`
 
+### Go to project folder
+`cd BSE-vs-NSE-Stock`
+
+### Activate environment
+`source env/bin/activate`
+
+### Install requirements
 `pip install -r requirements.txt`
 
+### Run the app
 `python app.py`
 
 > Open localhost:5000 in a browser to use the app
+
+<br>
+
+---
+
+<br>
+
 
 ## Usage
 
